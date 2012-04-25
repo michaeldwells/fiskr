@@ -13,8 +13,8 @@ for (var i in allNodes)
 {
     if (allNodes[i].childElementCount == 0)
     {
-        if ((allNodes[i].textContent != "") and
-            (allNodes[i].tagName.toLowerCase() != "script") and
+        if ((allNodes[i].textContent != "") &&
+            (allNodes[i].tagName.toLowerCase() != "script") &&
             (allNodes[i].tagName.toLowerCase() != "style"))
         {
             if (sel.isCollapsed or sel.containsNode(allNodes[i], true))
