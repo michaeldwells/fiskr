@@ -9,7 +9,7 @@ var sel = window.getSelection();
 function crawl(n)
 {
     var out = [];
-    for (var i in n.childNodes)
+    for (var i=0; i<n.childNodes.length; i++)
     {
         var kid = n.childNodes[i];
         if (sel.isCollapsed || sel.containsNode(kid, true))
@@ -24,7 +24,7 @@ function crawl(n)
             if (kid.nodeType == Node.ELEMENT_NODE)
             {
                 var grandKids = crawl(kid);
-                for (var j in grandKids)
+                for (var j=0; j<grandKids.length; j++)
                 {
                     out.push(grandKids[j]);
                 }
