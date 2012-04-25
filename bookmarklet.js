@@ -12,7 +12,9 @@ var document = window.document;
 var allNodes = document.querySelectorAll('*');
 var texts = [];
 for (var i in allNodes) {
-    texts.push(allNodes[i].textContent);
+    if (allNodes[i].childElementCount == 0) {
+        texts.push(allNodes[i].textContent);
+    }
 }
 
 document.body.innerHTML = "";
