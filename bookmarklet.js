@@ -11,7 +11,7 @@ var document = window.document;
 
 var texts = []
 for (var n in document.querySelector('*')) {
-    texts.append(n.textContent);
+    texts.push(n.textContent);
 }
 
 document.body.innerHTML = "";
