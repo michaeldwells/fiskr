@@ -9,7 +9,7 @@ var sel = window.getSelection();
 function crawl(n)
 {
     var out = [];
-    for (var i in n.children)
+    for (var i in n.childNodes)
     {
         kid = n.children[i];
         if ((kid.nodeType == Node.TEXT_NODE) ||
@@ -19,8 +19,7 @@ function crawl(n)
             out.push(kid.textContent);
         }
         else
-        if ((kid.nodeType == Node.ELEMENT_NODE) &&
-            (kid.nodeType != Node.COMMENT_NODE))
+        if (kid.nodeType == Node.ELEMENT_NODE)
         {
             var grandKids = crawl(kid);
             for (var j in grandKids)
