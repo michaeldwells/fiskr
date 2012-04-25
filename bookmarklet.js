@@ -12,19 +12,22 @@ function crawl(n)
     for (var i in n.childNodes)
     {
         var kid = n.childNodes[i];
-        if ((kid.nodeType == Node.TEXT_NODE) ||
-            (kid.nodeType == Node.CDATA_SECTION_NODE) &&
-            (kid.textContent != ""))
+        if (sel.isCollapsed || sel.containsNode(kid, true))
         {
-            out.push(kid.textContent);
-        }
-        else
-        if (kid.nodeType == Node.ELEMENT_NODE)
-        {
-            var grandKids = crawl(kid);
-            for (var j in grandKids)
+            if ((kid.nodeType == Node.TEXT_NODE) ||
+                (kid.nodeType == Node.CDATA_SECTION_NODE) &&
+                (kid.textContent != ""))
             {
-                out.push(grandKids[j]);
+                out.push(kid.textContent);
+            }
+            else
+            if (kid.nodeType == Node.ELEMENT_NODE)
+            {
+                var grandKids = crawl(kid);
+                for (var j in grandKids)
+                {
+                    out.push(grandKids[j]);
+                }
             }
         }
     }
