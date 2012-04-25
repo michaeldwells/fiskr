@@ -6,7 +6,38 @@ var document = window.document;
 
 var sel = window.getSelection();
 
+function crawl(n)
+{
+    var out = [];
+    for (var i in n.children)
+    {
+        kid = n.children[i];
+        if ((kid.textContent == "") ||
+            (kid.tagName.toLowerCase() == "script") ||
+            (kid.tagName.toLowerCase() == "style") ||
+            (kid.nodeType == Node.COMMENT_NODE))
+        {
+        }
+        else
+        if ((kid.nodeType == Node.TEXT_NODE) ||
+            (kid.nodeType == Node.CDATA_SECTION_NODE))
+        {
+            out.push(kid.textContent);
+        }
+        else
+        {
+            var grandKids = crawl(kid);
+            for (var j in grandKids)
+            {
+                out.push(grandKids[j]);
+            }
+        }
+    }
+    return out;
+}
+
 // Get the non-trivial text content from every leaf node
+/*
 var allNodes = document.querySelectorAll('*');
 var texts = [];
 for (var i in allNodes)
@@ -24,6 +55,8 @@ for (var i in allNodes)
         }
     }
 }
+*/
+var texts = crawl(document.body);
 
 // Clear the body
 document.body.innerHTML = "";
