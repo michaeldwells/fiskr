@@ -9,16 +9,17 @@ var document = window.document;
 
 //document.body.innerHTML = "<p>Hello</p>";
 
-var texts = []
-for (var n in document.querySelector('*')) {
-    texts.push(n.textContent);
+var allNodes = document.querySelector('*');
+var texts = [];
+for (var i in allNodes) {
+    texts.push(allNodes[i].textContent);
 }
 
 document.body.innerHTML = "";
 
-for (var t in texts) {
+for (var i in texts) {
     var p = document.createElement('p');
-    p.innerHTML = t;
+    p.innerHTML = texts[i];
     document.body.appendChild(p);
 }
 
