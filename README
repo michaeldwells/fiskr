@@ -1,3 +1,8 @@
 At the moment, just testing bookmarklet powers...
 
 (later, World domination)
+
+
+javascript:(function(){document.head.innerHTML='';var%20script=document.createElement('script');script.src='https://raw.github.com/michaeldwells/fiskr/master/bookmarklet.js';script.type="text/javascript";script.className='bookmarkscript';document.head.appendChild(script);})();
+
+That's for if you want to join in.
