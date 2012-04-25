@@ -9,7 +9,7 @@ var document = window.document;
 
 //document.body.innerHTML = "<p>Hello</p>";
 
-var allNodes = document.querySelector('*');
+var allNodes = document.querySelectorAll('*');
 var texts = [];
 for (var i in allNodes) {
     texts.push(allNodes[i].textContent);
