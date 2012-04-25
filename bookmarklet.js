@@ -12,20 +12,15 @@ function crawl(n)
     for (var i in n.children)
     {
         kid = n.children[i];
-        if ((kid.textContent == "") ||
-            (kid.nodeType == Node.COMMENT_NODE))
-        {
-        }
-        else
         if ((kid.nodeType == Node.TEXT_NODE) ||
-            (kid.nodeType == Node.CDATA_SECTION_NODE))
+            (kid.nodeType == Node.CDATA_SECTION_NODE) &&
+            (kid.textContent != ""))
         {
             out.push(kid.textContent);
         }
         else
         if ((kid.nodeType == Node.ELEMENT_NODE) &&
-            (kid.tagName.toLowerCase() != "script") &&
-            (kid.tagName.toLowerCase() != "style"))
+            (kid.nodeType != Node.COMMENT_NODE))
         {
             var grandKids = crawl(kid);
             for (var j in grandKids)
