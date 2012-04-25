@@ -17,7 +17,7 @@ for (var i in allNodes)
             (allNodes[i].tagName.toLowerCase() != "script") &&
             (allNodes[i].tagName.toLowerCase() != "style"))
         {
-            if (sel.isCollapsed or sel.containsNode(allNodes[i], true))
+            if (sel.isCollapsed || sel.containsNode(allNodes[i], true))
             {
                 texts.push(allNodes[i].textContent);
             }
