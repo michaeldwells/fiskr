@@ -13,8 +13,6 @@ function crawl(n)
     {
         kid = n.children[i];
         if ((kid.textContent == "") ||
-            (kid.tagName.toLowerCase() == "script") ||
-            (kid.tagName.toLowerCase() == "style") ||
             (kid.nodeType == Node.COMMENT_NODE))
         {
         }
@@ -25,6 +23,9 @@ function crawl(n)
             out.push(kid.textContent);
         }
         else
+        if ((kid.nodeType == Node.ELEMENT_NODE) &&
+            (kid.tagName.toLowerCase() != "script") &&
+            (kid.tagName.toLowerCase() != "style"))
         {
             var grandKids = crawl(kid);
             for (var j in grandKids)
