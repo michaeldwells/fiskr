@@ -11,7 +11,7 @@ function crawl(n)
     var out = [];
     for (var i in n.childNodes)
     {
-        kid = n.children[i];
+        var kid = n.childNodes[i];
         if ((kid.nodeType == Node.TEXT_NODE) ||
             (kid.nodeType == Node.CDATA_SECTION_NODE) &&
             (kid.textContent != ""))
