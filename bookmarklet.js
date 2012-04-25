@@ -10,13 +10,13 @@ var document = window.document;
 //document.body.innerHTML = "<p>Hello</p>";
 
 var texts = []
-for n in document.querySelector('*') {
+for (var n in document.querySelector('*')) {
     texts.append(n.textContent);
 }
 
 document.body.innerHTML = "";
 
-for t in texts {
+for (var t in texts) {
     var p = document.createElement('p');
     p.innerHTML = t;
     document.body.appendChild(p);
