@@ -18,13 +18,11 @@ function inline(node)
             var displayMode = window.getComputedStyle(child,null).getPropertyValue("display");
             if (displayMode === "inline")
             {
-                /*
                 var grandChild = child.firstChild;
                 if (grandChild)
                 {
                     while (grandChild)
                     {
-                        grandChild.style.background = "green";
                         node.insertBefore(grandChild, child.nextSibling);
                         grandChild = child.firstChild;
                     }
@@ -34,7 +32,6 @@ function inline(node)
                     textNode = document.createTextNode(child.textContent);
                     node.insertBefore(textNode, child.nextSibling);
                 }
-                */
                 child.style.background = "red";
                 //node.removeChild(child);
             }
