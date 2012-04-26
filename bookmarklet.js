@@ -6,24 +6,55 @@ var document = window.document;
 
 var sel = window.getSelection();
 
-function crawl(n)
+function inline(n)
+{
+    for (var i=0; i<n.childNodes.length; i++)
+    {
+        var child = n.childNodes[i];
+        if (child.nodeType == Node.ELEMENT_NODE)
+        {
+            inline(child);
+            var displayMode = window.getComputedStyle(child,null).getPropertyValue("display");
+            if (display == "inline")
+            {
+                if (i < n.childNodes.length-1)
+                {
+                    for (j=0; j<child.childNodes.length; j++)
+                    {
+                        n.insertBefore(child.childNodes[j],n.childNodes[i+1]);
+                    }
+                }
+                else
+                {
+                    for (j=0; j<child.childNodes.length; j++)
+                    {
+                        n.insertBefore(child.childNodes[j]);
+                    }
+                }
+                n.removeChild(child);
+            }
+        }
+    }
+}
+
+function serialize(n)
 {
     var out = [];
     for (var i=0; i<n.childNodes.length; i++)
     {
-        var kid = n.childNodes[i];
-        if (sel.isCollapsed || sel.containsNode(kid, true))
+        var child = n.childNodes[i];
+        if (sel.isCollapsed || sel.containsNode(child, true))
         {
-            if ((kid.nodeType == Node.TEXT_NODE) ||
-                (kid.nodeType == Node.CDATA_SECTION_NODE) &&
-                (kid.textContent != ""))
+            if ((child.nodeType == Node.TEXT_NODE) ||
+                (child.nodeType == Node.CDATA_SECTION_NODE) &&
+                (child.textContent != ""))
             {
-                out.push(kid.textContent);
+                out.push(child.textContent);
             }
             else
-            if (kid.nodeType == Node.ELEMENT_NODE)
+            if (child.nodeType == Node.ELEMENT_NODE)
             {
-                var grandKids = crawl(kid);
+                var grandKids = crawl(child);
                 for (var j=0; j<grandKids.length; j++)
                 {
                     out.push(grandKids[j]);
@@ -54,7 +85,9 @@ for (var i in allNodes)
     }
 }
 */
-var texts = crawl(document.body);
+
+inline(document.body);
+var texts = serialize(document.body);
 
 // Clear the body
 document.body.innerHTML = "";
