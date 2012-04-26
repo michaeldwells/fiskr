@@ -21,7 +21,7 @@ function inline(n)
                 var grandChild = child.firstChild;
                 while (grandChild)
                 {
-                    n.insertBefore(grandChild, child);
+                    n.insertBefore(grandChild, child.nextSibling);
                     grandChild = child.firstChild;
                 }
                 n.removeChild(child);
