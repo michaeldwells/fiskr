@@ -21,14 +21,14 @@ function inline(n)
                 {
                     for (j=0; j<child.childNodes.length; j++)
                     {
-                        n.insertBefore(child.childNodes[j],n.childNodes[i+1]);
+                        n.insertBefore(child.childNodes[j], n.childNodes[i+1]);
                     }
                 }
                 else
                 {
                     for (j=0; j<child.childNodes.length; j++)
                     {
-                        n.insertBefore(child.childNodes[j]);
+                        n.insertBefore(child.childNodes[j], null);
                     }
                 }
                 n.removeChild(child);
