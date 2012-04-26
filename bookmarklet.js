@@ -9,10 +9,10 @@ var sel = window.getSelection();
 function inline(n)
 {
     var child = n.firstChild;
-    //for (var i=0; i<n.childNodes.length; i++)
     while (child)
     {
-        if (child.nodeType == Node.ELEMENT_NODE)
+        if ((child.nodeType == Node.ELEMENT_NODE) &&
+            (sel.isCollapsed || sel.containsNode(child, true)))
         {
             inline(child);
             var displayMode = window.getComputedStyle(child,null).getPropertyValue("display");
@@ -59,30 +59,10 @@ function serialize(n)
     return out;
 }
 
-// Get the non-trivial text content from every leaf node
-/*
-var allNodes = document.querySelectorAll('*');
-var texts = [];
-for (var i in allNodes)
-{
-    if (allNodes[i].childElementCount == 0)
-    {
-        if ((allNodes[i].textContent != "") &&
-            (allNodes[i].tagName.toLowerCase() != "script") &&
-            (allNodes[i].tagName.toLowerCase() != "style"))
-        {
-            if (sel.isCollapsed || sel.containsNode(allNodes[i], true))
-            {
-                texts.push(allNodes[i].textContent);
-            }
-        }
-    }
-}
-*/
-
 inline(document.body);
 document.body.normalize();
 
+/*
 var texts = serialize(document.body);
 
 // Clear the body
@@ -95,6 +75,6 @@ for (var i in texts)
     p.innerHTML = texts[i];
     document.body.appendChild(p);
 }
-
+*/
 
 }(window));
