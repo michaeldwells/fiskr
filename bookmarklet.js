@@ -19,18 +19,11 @@ function inline(node)
             if (displayMode === "inline")
             {
                 var grandChild = child.firstChild;
-                if (grandChild)
+                while (grandChild)
                 {
-                    while (grandChild)
-                    {
-                        node.insertBefore(grandChild, child.nextSibling);
-                        grandChild = child.firstChild;
-                    }
-                }
-                else
-                {
-                    textNode = document.createTextNode(child.textContent);
-                    node.insertBefore(textNode, child.nextSibling);
+                    grandChild = child.removeChild(grandChild);
+                    node.insertBefore(grandChild, child.nextSibling);
+                    grandChild = child.firstChild;
                 }
                 child.style.background = "red";
                 //node.removeChild(child);
