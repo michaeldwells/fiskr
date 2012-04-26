@@ -8,32 +8,26 @@ var sel = window.getSelection();
 
 function inline(n)
 {
-    for (var i=0; i<n.childNodes.length; i++)
+    var child = n.firstChild;
+    //for (var i=0; i<n.childNodes.length; i++)
+    while (child)
     {
-        var child = n.childNodes[i];
         if (child.nodeType == Node.ELEMENT_NODE)
         {
             inline(child);
             var displayMode = window.getComputedStyle(child,null).getPropertyValue("display");
             if (displayMode == "inline")
             {
-                if (i < n.childNodes.length-1)
+                var grandChild = child.firstChild;
+                while (grandChild)
                 {
-                    for (j=0; j<child.childNodes.length; j++)
-                    {
-                        n.insertBefore(child.childNodes[j], n.childNodes[i+1]);
-                    }
-                }
-                else
-                {
-                    for (j=0; j<child.childNodes.length; j++)
-                    {
-                        n.insertBefore(child.childNodes[j], null);
-                    }
+                    n.insertBefore(grandChild, child);
+                    grandChild = child.firstChild;
                 }
                 n.removeChild(child);
             }
         }
+        child = child.nextSibling;
     }
 }
 
