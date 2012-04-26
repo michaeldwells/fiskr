@@ -23,7 +23,7 @@ function inline(n)
                 {
                     while (grandChild)
                     {
-                        grandChild = child.removeChild(grandChild);
+                        grandChild.style.background = "green";
                         n.insertBefore(grandChild, child.nextSibling);
                         grandChild = child.firstChild;
                     }
@@ -34,7 +34,7 @@ function inline(n)
                     n.insertBefore(textNode, child.nextSibling);
                 }
                 n.removeChild(child);
-                //child.style.background = "red";
+                child.style.background = "red";
             }
         }
         child = child.nextSibling;
