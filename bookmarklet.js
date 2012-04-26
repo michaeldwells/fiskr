@@ -11,12 +11,12 @@ function inline(n)
     var child = n.firstChild;
     while (child)
     {
-        if ((child.nodeType == Node.ELEMENT_NODE) &&
+        if ((child.nodeType === Node.ELEMENT_NODE) &&
             (sel.isCollapsed || sel.containsNode(child, true)))
         {
             inline(child);
             var displayMode = window.getComputedStyle(child,null).getPropertyValue("display");
-            if (displayMode == "inline")
+            if (displayMode === "inline")
             {/*
                 var grandChild = child.firstChild;
                 while (grandChild)
@@ -25,7 +25,7 @@ function inline(n)
                     grandChild = child.firstChild;
                 }
                 n.removeChild(child);*/
-                child.style.color = blue;
+                child.style.background = "red";
             }
         }
         child = child.nextSibling;
