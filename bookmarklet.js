@@ -87,6 +87,8 @@ for (var i in allNodes)
 */
 
 inline(document.body);
+
+/*
 var texts = serialize(document.body);
 
 // Clear the body
@@ -99,6 +101,6 @@ for (var i in texts)
     p.innerHTML = texts[i];
     document.body.appendChild(p);
 }
-
+*/
 
 }(window));
