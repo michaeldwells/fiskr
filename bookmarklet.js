@@ -23,6 +23,7 @@ function inline(n)
                 {
                     while (grandChild)
                     {
+                        grandChild = child.removeChild(grandChild);
                         n.insertBefore(grandChild, child.nextSibling);
                         grandChild = child.firstChild;
                     }
