@@ -81,7 +81,7 @@ for (var i in allNodes)
 */
 
 inline(document.body);
-
+document.body.normalize();
 
 var texts = serialize(document.body);
 
