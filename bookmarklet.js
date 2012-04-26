@@ -6,9 +6,9 @@ var document = window.document;
 
 var sel = window.getSelection();
 
-function inline(n)
+function inline(node)
 {
-    var child = n.firstChild;
+    var child = node.firstChild;
     while (child)
     {
         if ((child.nodeType === Node.ELEMENT_NODE) &&
@@ -25,18 +25,18 @@ function inline(n)
                     while (grandChild)
                     {
                         grandChild.style.background = "green";
-                        n.insertBefore(grandChild, child.nextSibling);
+                        node.insertBefore(grandChild, child.nextSibling);
                         grandChild = child.firstChild;
                     }
                 }
                 else
                 {
                     textNode = document.createTextNode(child.textContent);
-                    n.insertBefore(textNode, child.nextSibling);
+                    node.insertBefore(textNode, child.nextSibling);
                 }
                 */
-                n.removeChild(child);
-                //child.style.background = "red";
+                child.style.background = "red";
+                node.removeChild(child);
             }
         }
         child = child.nextSibling;
