@@ -17,14 +17,15 @@ function inline(n)
             inline(child);
             var displayMode = window.getComputedStyle(child,null).getPropertyValue("display");
             if (displayMode == "inline")
-            {
+            {/*
                 var grandChild = child.firstChild;
                 while (grandChild)
                 {
                     n.insertBefore(grandChild, child.nextSibling);
                     grandChild = child.firstChild;
                 }
-                n.removeChild(child);
+                n.removeChild(child);*/
+                child.style.color = blue;
             }
         }
         child = child.nextSibling;
