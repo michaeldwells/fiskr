@@ -17,15 +17,23 @@ function inline(n)
             inline(child);
             var displayMode = window.getComputedStyle(child,null).getPropertyValue("display");
             if (displayMode === "inline")
-            {/*
+            {
                 var grandChild = child.firstChild;
-                while (grandChild)
+                if (grandChild)
                 {
-                    n.insertBefore(grandChild, child.nextSibling);
-                    grandChild = child.firstChild;
+                    while (grandChild)
+                    {
+                        n.insertBefore(grandChild, child.nextSibling);
+                        grandChild = child.firstChild;
+                    }
                 }
-                n.removeChild(child);*/
-                child.style.background = "red";
+                else
+                {
+                    textNode = document.createTextNode(child.textContent);
+                    n.insertBefore(textNode, child.nextSibling);
+                }
+                n.removeChild(child);
+                //child.style.background = "red";
             }
         }
         child = child.nextSibling;
