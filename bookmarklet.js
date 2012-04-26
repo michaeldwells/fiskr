@@ -15,7 +15,7 @@ function inline(n)
         {
             inline(child);
             var displayMode = window.getComputedStyle(child,null).getPropertyValue("display");
-            if (display == "inline")
+            if (displayMode == "inline")
             {
                 if (i < n.childNodes.length-1)
                 {
