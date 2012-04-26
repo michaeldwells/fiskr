@@ -11,12 +11,12 @@ function inline(node)
     var child = node.firstChild;
     while (child)
     {
-        if ((child.nodeType === Node.ELEMENT_NODE) &&
+        if ((child.nodeType == Node.ELEMENT_NODE) &&
             (sel.isCollapsed || sel.containsNode(child, true)))
         {
             inline(child);
             var displayMode = window.getComputedStyle(child,null).getPropertyValue("display");
-            if (displayMode === "inline")
+            if (displayMode == "inline")
             {
                 /*
                 var grandChild = child.firstChild;
