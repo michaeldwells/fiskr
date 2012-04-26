@@ -54,10 +54,10 @@ function serialize(n)
             else
             if (child.nodeType == Node.ELEMENT_NODE)
             {
-                var grandKids = crawl(child);
-                for (var j=0; j<grandKids.length; j++)
+                var grandChildren = serialize(child);
+                for (var j=0; j<grandChildren.length; j++)
                 {
-                    out.push(grandKids[j]);
+                    out.push(grandChildren[j]);
                 }
             }
         }
