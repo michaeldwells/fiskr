@@ -98,7 +98,7 @@ function serialize(n)
 flattenAllInlines();
 document.body.normalize();
 
-/*
+
 var texts = serialize(document.body);
 
 // Clear the body
@@ -111,6 +111,6 @@ for (var i in texts)
     p.innerHTML = texts[i];
     document.body.appendChild(p);
 }
-*/
+
 
 }(window));
