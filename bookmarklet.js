@@ -56,9 +56,9 @@ function serialize(n,selection)
 function pageToTextBlocks()
 {
     var selection = window.getSelection();
-    flattenInlineNodes(document.body, selection);
+    flattenInlineNodes(document.body, window.getSelection());
     document.body.normalize();
-    var texts = serialize(document.body, selection);
+    var texts = serialize(document.body, window.getSelection());
 
     // Clear the body
     document.body.innerHTML = "";
