@@ -23,6 +23,10 @@ function flattenInline(node)
             node.parentNode.removeChild(node);
         }
     }
+    for (var i=0; i<node.childNodes.length; i++)
+    {
+        flattenInline(node.childNode[i]);
+    }
 }
             /*
             var child = match.firstChild;
@@ -96,7 +100,7 @@ function serialize(n)
     return out;
 }
 
-flattenAllInlines();
+flattenInline(document.body);
 document.body.normalize();
 
 /*
