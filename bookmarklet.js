@@ -4,9 +4,7 @@
 var window = originalWindow;
 var document = window.document;
 
-var sel = window.getSelection();
-
-function flattenInline(node)
+function flattenInlineNodes(node)
 {
     if ((node.nodeType === Node.ELEMENT_NODE) &&
         (sel.isCollapsed || sel.containsNode(node, true)))
@@ -17,62 +15,17 @@ function flattenInline(node)
             for (var i=0; i<node.childNodes.length; i++)
             {
                 node.parentNode.insertBefore(node.childNodes[i].cloneNode(true), node.nextSibling);
-                if (node.nextSibling.style)
-                    node.nextSibling.style.background = "red";
             }
             node.parentNode.removeChild(node);
         }
     }
     for (var i=0; i<node.childNodes.length; i++)
     {
-        flattenInline(node.childNodes[i]);
+        flattenInlineNodes(node.childNodes[i]);
     }
 }
-            /*
-            var child = match.firstChild;
-            while (child)
-            {
-                match.parent.insertBefore(child, match.nextSibling);
-                child = match.firstChild;
-            }
-            */
-            //node.removeChild(match);
 
-function flattenAllInlines()
-{
-    var matches = document.querySelectorAll("body *");
-    for (var i=0; i<matches.length; i++)
-    {
-        flattenInline(matches[i]);
-    }
-}
-    /*
-    var child = node.firstChild;
-    while (child)
-    {
-        if ((child.nodeType === Node.ELEMENT_NODE) &&
-            (sel.isCollapsed || sel.containsNode(child, true)))
-        {
-            inline(child);
-            var displayMode = window.getComputedStyle(child,null).getPropertyValue("display");
-            if (displayMode === "inline")
-            {
-                var grandChild = child.firstChild;
-                while (grandChild)
-                {
-                    grandChild = child.removeChild(grandChild);
-                    node.insertBefore(grandChild, child.nextSibling);
-                    grandChild = child.firstChild;
-                }
-                child.style.background = "red";
-                //node.removeChild(child);
-            }
-        }
-        child = child.nextSibling;
-    }
-    */
-
-function serialize(n)
+function serialize(n,sel)
 {
     var out = [];
     for (var i=0; i<n.childNodes.length; i++)
@@ -100,22 +53,24 @@ function serialize(n)
     return out;
 }
 
-flattenInline(document.body);
-document.body.normalize();
-
-/*
-var texts = serialize(document.body);
-
-// Clear the body
-document.body.innerHTML = "";
-
-// Populate the body with just the text from the original document
-for (var i in texts)
+function pageToTextBlocks()
 {
-    var p = document.createElement('p');
-    p.innerHTML = texts[i];
-    document.body.appendChild(p);
+    flattenInlineNodes(document.body);
+    document.body.normalize();
+    var texts = serialize(document.body, window.getSelection());
+
+    // Clear the body
+    document.body.innerHTML = "";
+
+    // Populate the body with just the text from the original document
+    for (var i in texts)
+    {
+        var p = document.createElement('p');
+        p.innerHTML = texts[i];
+        document.body.appendChild(p);
+    }
 }
-*/
+
+pageToTextBlocks();
 
 }(window));
