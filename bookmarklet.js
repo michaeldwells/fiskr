@@ -4,10 +4,10 @@
 var window = originalWindow;
 var document = window.document;
 
-function flattenInlineNodes(node)
+function flattenInlineNodes(node,selection)
 {
     if ((node.nodeType === Node.ELEMENT_NODE) &&
-        (sel.isCollapsed || sel.containsNode(node, true)))
+        (selection.isCollapsed || selection.containsNode(node, true)))
     {
         var displayMode = window.getComputedStyle(node,null).getPropertyValue("display");
         if (displayMode === "inline")
@@ -21,17 +21,17 @@ function flattenInlineNodes(node)
     }
     for (var i=0; i<node.childNodes.length; i++)
     {
-        flattenInlineNodes(node.childNodes[i]);
+        flattenInlineNodes(node.childNodes[i], selection);
     }
 }
 
-function serialize(n,sel)
+function serialize(n,selection)
 {
     var out = [];
     for (var i=0; i<n.childNodes.length; i++)
     {
         var child = n.childNodes[i];
-        if (sel.isCollapsed || sel.containsNode(child, true))
+        if (selection.isCollapsed || selection.containsNode(child, true))
         {
             if ((child.nodeType == Node.TEXT_NODE) ||
                 (child.nodeType == Node.CDATA_SECTION_NODE) &&
@@ -55,9 +55,10 @@ function serialize(n,sel)
 
 function pageToTextBlocks()
 {
-    flattenInlineNodes(document.body);
+    var selection = window.getSelection()
+    flattenInlineNodes(document.body, selection);
     document.body.normalize();
-    var texts = serialize(document.body, window.getSelection());
+    var texts = serialize(document.body, selection);
 
     // Clear the body
     document.body.innerHTML = "";
