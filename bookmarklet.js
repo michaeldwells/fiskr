@@ -25,7 +25,7 @@ function flattenInline(node)
     }
     for (var i=0; i<node.childNodes.length; i++)
     {
-        flattenInline(node.childNode[i]);
+        flattenInline(node.childNodes[i]);
     }
 }
             /*
