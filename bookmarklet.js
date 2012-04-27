@@ -17,7 +17,8 @@ function flattenInline(node)
             for (var i=0; i<node.childNodes.length; i++)
             {
                 node.parentNode.insertBefore(node.childNodes[i].cloneNode(true), node.nextSibling);
-                node.nextSibling.style.background = "red";
+                if (node.nextSibling.style)
+                    node.nextSibling.style.background = "red";
             }
             node.parentNode.removeChild(node);
         }
