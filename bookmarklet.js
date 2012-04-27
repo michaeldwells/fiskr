@@ -14,10 +14,10 @@ function flattenInline(node)
         var displayMode = window.getComputedStyle(node,null).getPropertyValue("display");
         if (displayMode === "inline")
         {
-            node.style.background = "red";
             for (var i=0; i<node.childNodes.length; i++)
             {
                 node.parentNode.insertBefore(node.childNodes[i].cloneNode(true), node.nextSibling);
+                node.nextSibling.style.background = "red";
             }
             node.parentNode.removeChild(node);
         }
@@ -98,7 +98,7 @@ function serialize(n)
 flattenAllInlines();
 document.body.normalize();
 
-
+/*
 var texts = serialize(document.body);
 
 // Clear the body
@@ -111,6 +111,6 @@ for (var i in texts)
     p.innerHTML = texts[i];
     document.body.appendChild(p);
 }
-
+*/
 
 }(window));
