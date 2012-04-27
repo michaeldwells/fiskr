@@ -17,9 +17,9 @@ function flattenInline(node)
             node.style.background = "red";
             for (var i=0; i<node.childNodes.length; i++)
             {
-                node.parent.insertBefore(node.childNodes[i].clone(true), node.nextSibling);
+                node.parentNode.insertBefore(node.childNodes[i].clone(true), node.nextSibling);
             }
-            node.parent.removeChild(node);
+            node.parentNode.removeChild(node);
         }
     }
 }
