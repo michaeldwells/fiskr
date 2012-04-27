@@ -6,8 +6,42 @@ var document = window.document;
 
 var sel = window.getSelection();
 
-function inline(node)
+function flattenInline(node)
 {
+    if ((node.nodeType === Node.ELEMENT_NODE) &&
+        (sel.isCollapsed || sel.containsNode(node, true)))
+    {
+        var displayMode = window.getComputedStyle(node,null).getPropertyValue("display");
+        if (displayMode === "inline")
+        {
+            node.style.background = "red";
+            for (var i=0; i<node.childNodes.length; i++)
+            {
+                node.parent.insertBefore(node.childNodes[i].clone(true), node.nextSibling);
+            }
+            node.parent.removeChild(node);
+        }
+    }
+}
+            /*
+            var child = match.firstChild;
+            while (child)
+            {
+                match.parent.insertBefore(child, match.nextSibling);
+                child = match.firstChild;
+            }
+            */
+            //node.removeChild(match);
+
+function flattenAllInlines()
+{
+    var matches = document.querySelectorAll("body *");
+    for (var i=0; i<matches.length; i++)
+    {
+        flattenInline(matches[i]);
+    }
+}
+    /*
     var child = node.firstChild;
     while (child)
     {
@@ -31,7 +65,7 @@ function inline(node)
         }
         child = child.nextSibling;
     }
-}
+    */
 
 function serialize(n)
 {
@@ -61,7 +95,7 @@ function serialize(n)
     return out;
 }
 
-inline(document.body);
+flattenAllInlines();
 document.body.normalize();
 
 /*
