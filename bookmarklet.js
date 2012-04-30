@@ -65,7 +65,9 @@ function pageToTextBlocks()
     var texts = serialize(document.body);
 
     // Clear the body
-    document.body.innerHTML = "";
+    while (document.body.firstChild)
+        document.body.removeChild(document.body.firstChild);
+    //document.body.innerHTML = "";
 
     // Populate the body with just the text from the original document
     for (var i in texts)
